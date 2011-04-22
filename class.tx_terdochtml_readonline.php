@@ -283,6 +283,22 @@ class tx_terdochtml_readonline extends tx_terdoc_documentformat_display {
 			'params' => 'class="tx-terdochtml-clickenlarge"'
 		);
 
+			// Add shadowbox if installed
+		if (t3lib_extMgm::isLoaded('pmkshadowbox')) {
+			$linkWrapConf = array(
+				'enable' => '1',
+				'typolink.' => array(
+					'parameter.' => array(
+						'cObject' => 'IMG_RESOURCE',
+						'cObject.' => array(
+							'file' => ''
+						),
+					),
+					'ATagParams' => 'rel="shadowbox"',
+				),
+			);
+		}
+
 		$imagesArr = t3lib_div::getFilesInDir ($documentDir.'docbook/pictures/', 'png,gif,jpg');
 		if (is_array ($imagesArr)) {
 			$picturesRelativePath = substr ($documentDir, strlen (PATH_site)).'docbook/pictures/';
@@ -295,10 +311,13 @@ class tx_terdochtml_readonline extends tx_terdoc_documentformat_display {
 						$renderedImageTag = '<img class="tx-terdochtml-inline" src="'.$picturesRelativePath.$filename.'" width="'.$imageDimensionsArr[0].'" height="'.$imageDimensionsArr[1].'" alt="" title="" />';
 					} else {
 						$imageConf['file'] = $picturesRelativePath.$filename;
+						if (isset($linkWrapConf['typolink.']['parameter.']['cObject.']['file'])) {
+							$linkWrapConf['typolink.']['parameter.']['cObject.']['file'] = $imageConf['file'];
+						}
 
 						$renderedImageTag ='
 							<div style="text-align: center; margin: 10px 0 10px 0;"> '.
-								$pObj->cObj->imageLinkWrap ($pObj->cObj->IMAGE ($imageConf), $picturesRelativePath.$filename, $linkWrapConf).'
+								$pObj->cObj->imageLinkWrap($pObj->cObj->IMAGE($imageConf), $imageConf['file'], $linkWrapConf).'
 							</div>
 						';
 					}
