@@ -212,7 +212,7 @@ class tx_terdochtml_readonline extends tx_terdoc_documentformat_display {
 				<br />
 				<h3>Table Of Contents</h3>
 				<br />
-				<ul>
+				<ul class="ter_doc_html_toc">
 			';
 			foreach ($tocArr as $chapterNr => $chapterArr) {
 				$output .= '<li class="level-1">'.$chapterNr.'. ';
