@@ -321,7 +321,7 @@ class tx_terdochtml_readonline extends tx_terdoc_documentformat_display {
 							</div>
 						';
 					}
-					$html = preg_replace ('/(<img src="\{TX_TERDOC_PICTURESDIR\}'.$filename.'" width="NaN" \/>)/', $renderedImageTag, $html);
+					$html = preg_replace ('/(<img src="\{TX_TERDOC_PICTURESDIR\}'.$filename.'" width="NaN"(?: alt="")? \/>)/', $renderedImageTag, $html);
 				}
 			}
 		}
