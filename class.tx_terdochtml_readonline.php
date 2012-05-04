@@ -547,11 +547,11 @@ class tx_terdochtml_readonline extends tx_terdoc_documentformat_display {
 			$repl[1] = '&quot;';
 
 			$modifiedTitle = preg_replace($pat,$repl,$title);
-			$out .= preg_replace ('(" >'.$modifiedTitle.')','#'.$anchor[$subSectionNr-1].'" >'.$modifiedTitle.'',$pObj->pi_linkTP_keepPIvars($modifiedTitle, array('html_readonline_chapter' => $chapterNr, 'html_readonline_section' => $sectionNr), 1));
+			$out .= preg_replace ('("( target="_top")? >'.$modifiedTitle.')','#'.$anchor[$subSectionNr-1].'"\1 >'.$modifiedTitle.'',$pObj->pi_linkTP_keepPIvars($modifiedTitle, array('html_readonline_chapter' => $chapterNr, 'html_readonline_section' => $sectionNr), 1));
 			$out .= '</li>';
 		} else {
 			$modifiedTitle = $this->escapeTitle($subSectionArr['title']);
-			$out .= preg_replace ('(" >'.$modifiedTitle.')','#'.$anchor[$subSectionNr-1].'" >'.$docApiObj->csConvHSC($subSectionArr['title']).'',$pObj->pi_linkTP_keepPIvars($docApiObj->csConvHSC($subSectionArr['title']), array('html_readonline_chapter' => $chapterNr, 'html_readonline_section' => $sectionNr), 1));
+			$out .= preg_replace ('("( target="_top")? >'.$modifiedTitle.')','#'.$anchor[$subSectionNr-1].'"\1 >'.$docApiObj->csConvHSC($subSectionArr['title']).'',$pObj->pi_linkTP_keepPIvars($docApiObj->csConvHSC($subSectionArr['title']), array('html_readonline_chapter' => $chapterNr, 'html_readonline_section' => $sectionNr), 1));
 			$out .= '</li>';
 		}
 		return $out;
